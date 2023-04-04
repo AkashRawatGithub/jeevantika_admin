@@ -4,7 +4,7 @@ class PageTransition extends PageRouteBuilder{
 
   final Widget widget;
 
-  PageTransition({required this.widget}):super(
+  PageTransition({this.widget}):super(
     transitionDuration: Duration(milliseconds: 500),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(0.0, 1.0);
@@ -29,7 +29,7 @@ class SlideScreenTransition extends PageRouteBuilder{
 
   final Widget widget;
 
-  SlideScreenTransition({required this.widget}):super(
+  SlideScreenTransition({this.widget}):super(
     transitionDuration: Duration(milliseconds: 500),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         var begin = Offset(1.0, 0.0);

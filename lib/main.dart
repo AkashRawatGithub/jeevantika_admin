@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jeevantika_Web/page_layout.dart';
@@ -9,7 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  MyApp({key});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -17,9 +15,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Jeevantika crm',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
-      home: HomePage(),
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => const HomePage(),
+      },
+      // home: HomePage(),
+
     );
   }
 }

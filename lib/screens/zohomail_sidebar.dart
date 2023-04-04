@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ZohoSidebar extends StatefulWidget {
-  const ZohoSidebar({Key? key}) : super(key: key);
+  const ZohoSidebar({Key key}) : super(key: key);
 
   @override
   State<ZohoSidebar> createState() => _ZohoSidebarState();

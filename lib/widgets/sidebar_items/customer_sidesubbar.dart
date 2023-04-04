@@ -4,7 +4,7 @@ import '../style/style.dart';
 
 var custom_dash;
 class CustomerSideSub extends StatefulWidget {
-  const CustomerSideSub({Key? key}) : super(key: key);
+  const CustomerSideSub({Key key}) : super(key: key);
 
   @override
   State<CustomerSideSub> createState() => _CustomerSideSubState();

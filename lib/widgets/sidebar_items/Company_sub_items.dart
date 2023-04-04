@@ -6,7 +6,7 @@ import '../style/style.dart';
 
 var custom_dash;
 class CompanySubItem extends StatefulWidget {
-  const CompanySubItem({Key? key}) : super(key: key);
+  const CompanySubItem({Key key}) : super(key: key);
 
   @override
   State<CompanySubItem> createState() => _CompanySubItem();
@@ -20,7 +20,7 @@ class _CompanySubItem extends State<CompanySubItem> {
       color: dark,
       width: 135,
       child: Padding(
-        padding: const EdgeInsets.only(left: 9.0),
+        padding: const EdgeInsets.only(left: 119.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
