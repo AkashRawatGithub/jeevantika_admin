@@ -84,30 +84,33 @@ class _AnalyticCustomerContactState extends State<AnalyticCustomerContact> {
                             children: [
 
                               SizedBox(height: 10,width: 10 ),
-                              custom_textField_withlabel(
+                              custom_textField_withlabel2(
                                   company_name_controller,
                                   "Enter Customers Name",
                                   Colors.green,
                                   15,
                                   "Please Enter Customers Name",
+                                  "Customers Name*",
                                   true
                               ),
                               SizedBox(height: 10,width: 10),
-                              custom_textField_withlabel(
+                              custom_textField_withlabel2(
                                   company_name_controller,
                                   "Enter F/H/W Name",
                                   Colors.green,
                                   15,
                                   "Please Enter F/H/W Name",
+                                  "F/H/W Name *",
                                   true
                               ),
                               SizedBox(height: 10,width: 10,),
-                              custom_textField_withlabel(
+                              custom_textField_withlabel2(
                                   company_name_controller,
                                   "Enter Phone No.",
                                   Colors.green,
                                   15,
                                   "Please Enter Phone No.",
+                                  "Phone No.*",
                                   true
                               ),
                               Padding(
