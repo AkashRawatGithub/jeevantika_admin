@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:hovering/hovering.dart';
 
 import '../../utils/screen_size.dart';
+import '../../widgets/appbar_bottombar.dart';
 import '../../widgets/button.dart';
+import '../../widgets/get_drawer.dart';
 import '../../widgets/style/style.dart';
 import '../../widgets/text_field.dart';
 
@@ -42,189 +44,199 @@ class _InvestorListState extends State<InvestorList> {
   Widget build(BuildContext context) {
     var updatelist_= false;
     return Scaffold(
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Container(
-          color: pageBackground,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
+      appBar: getAppBar(),
+      body: Row(
+        children: [
+          getDrawer(context),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Container(
+                color: pageBackground,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
 
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  width: MediaQuery.of(context).size.width,
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      "Investor List",
-                      style: TextStyle(fontSize: 20, color: Colors.green),
-                    ),
-                  ),
-                  color: Colors.white,
-                ),
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.08,
+                        width: MediaQuery.of(context).size.width,
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Text(
+                            "Investor List",
+                            style: TextStyle(fontSize: 20, color: Colors.green),
+                          ),
+                        ),
+                        color: Colors.white,
+                      ),
 
-                Padding(
-                  padding: const EdgeInsets.only(top: 4.0),
-                  child: Form(
-                    child: Container(
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4.0),
+                        child: Form(
+                          child: Container(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      SizedBox(height: 10, width: 10),
+                                      Expanded(child:custom_SearchField_withlabel(
+                                        company_name_controller,
+                                        "Enter Company",
+                                        Colors.green,
+                                        15,
+                                        "Enter Company Name*",
+                                      ),),
+
+                                      SizedBox(height: 10, width: 10),
+                                      Expanded(child:  custom_SearchField_withlabel(
+                                        company_name_controller,
+                                        "Enter Investor",
+                                        Colors.green,
+                                        15,
+                                        "Select Investor Name *",
+                                      )),
+
+                                      SizedBox(height: 10, width: 10),
+                                      Expanded(child:  custom_SearchField_withlabel(
+                                        company_name_controller,
+                                        "Enter Father's Name",
+                                        Colors.green,
+                                        15,
+                                        "Father's Name*",
+                                      )),
+                                      SizedBox(height: 10, width: 10),
+                                      Expanded(child: custom_SearchField_withlabel(
+                                        company_name_controller,
+                                        "Enter Country",
+                                        Colors.green,
+                                        15,
+                                        "Country*",
+                                      )),
+
+                                      SizedBox(height: 10, width: 10,),
+                                      Expanded(child:  custom_SearchField_withlabel(
+                                        company_name_controller,
+                                        "Enter State",
+                                        Colors.green,
+                                        15,
+                                        "State*",
+                                      )),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
+                                        width: 10,
+                                      ),
+                                      Expanded(child: custom_SearchField_withlabel(
+                                        company_name_controller,
+                                        "Enter City",
+                                        Colors.green,
+                                        15,
+                                        "City*",
+                                      )),
+                                      SizedBox(
+                                        width: MediaQuery.of(context).size.width * 0.01,
+                                      ),
+                                      custom_button(Search, "  Search  "),
+                                      Expanded(flex:4,child: Container())
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      Container(
+                        color: Colors.white,
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                SizedBox(height: 10, width: 10),
-                                custom_SearchField_withlabel(
-                                    company_name_controller,
-                                    "Enter Company",
-                                    Colors.green,
-                                  15,
-                                    "Enter Company Name*",
-                                    ),
-                                SizedBox(height: 10, width: 10),
-                                custom_SearchField_withlabel(
-                                    company_name_controller,
-                                    "Enter Investor",
-                                    Colors.green,
-                                  15,
-                                    "Select Investor Name *",
-                                    ),
-                                SizedBox(height: 10, width: 10),
-                                custom_SearchField_withlabel(
-                                    company_name_controller,
-                                    "Enter Father's Name",
-                                    Colors.green,
-                                  15,
-                                    "Father's Name*",
-                                    ),
-                                SizedBox(height: 10, width: 10),
-                                custom_SearchField_withlabel(
-                                    company_name_controller,
-                                    "Enter Country",
-                                    Colors.green,
-                                  15,
-                                    "Country*",
-                                    ),
-                                SizedBox(
-                                  height: 10,
-                                  width: 10,
-                                ),
-                                custom_SearchField_withlabel(
-                                    company_name_controller,
-                                    "Enter State",
-                                    Colors.green,
-                                  15,
-                                    "State*",
-                                    ),
+                            DataTable(
+                              columns: [
+                                DataColumn(label: Text('S.No.')),
+                                DataColumn(label: Text('Company Name')),
+                                DataColumn(label: Text('Investor Name')),
+                                DataColumn(label: Text('Father Name')),
+                                DataColumn(label: Text('Country')),
+                                DataColumn(label: Text('State')),
+                                DataColumn(label: Text('City')),
+                                DataColumn(label: Text('Action')),
                               ],
+                              rows: _pagedData.map((data) {
+                                return DataRow(
+                                  cells: [
+                                    DataCell(Text(data.id.toString())),
+                                    DataCell(Text(data.name)),
+                                    DataCell(Text(data.description)),
+                                    DataCell(Text(data.name)),
+                                    DataCell(Text(data.description)),
+                                    DataCell(Text(data.name)),
+                                    DataCell(Text(data.data)),
+                                    DataCell(Row(
+                                      children: [
+                                        IconButton(icon: Icon(Icons.edit,size: 20,color: Colors.green,), onPressed: () {setState(() {
+
+                                        });  },),
+                                        IconButton(icon: Icon(Icons.delete,size: 20,color: Colors.red,), onPressed: () { setState(() {
+
+                                        });},),
+                                      ],
+                                    )),
+                                  ],
+                                );
+                              }).toList(),
                             ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                SizedBox(
-                                  height: 10,
-                                  width: 10,
+                                IconButton(
+                                  icon: Icon(Icons.arrow_back),
+                                  onPressed: _currentPage == 1
+                                      ? null
+                                      : () {
+                                    setState(() {
+                                      _currentPage--;
+                                    });
+                                  },
                                 ),
-                                custom_SearchField_withlabel(
-                                    company_name_controller,
-                                    "Enter City",
-                                    Colors.green,
-                                  15,
-                                    "City*",
-                                    ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.01,
+                                Text('Page $_currentPage'),
+                                IconButton(
+                                  icon: Icon(Icons.arrow_forward),
+                                  onPressed: _currentPage == (_data.length / _rowsPerPage).ceil()
+                                      ? null
+                                      : () {
+                                    setState(() {
+                                      _currentPage++;
+                                    });
+                                  },
                                 ),
-                                custom_button(Search, "  Search  "),
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                ),
 
-                Container(
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      DataTable(
-                        columns: [
-                          DataColumn(label: Text('S.No.')),
-                          DataColumn(label: Text('Company Name')),
-                          DataColumn(label: Text('Investor Name')),
-                          DataColumn(label: Text('Father Name')),
-                          DataColumn(label: Text('Country')),
-                          DataColumn(label: Text('State')),
-                          DataColumn(label: Text('City')),
-                          DataColumn(label: Text('Action')),
-                        ],
-                        rows: _pagedData.map((data) {
-                          return DataRow(
-                            cells: [
-                              DataCell(Text(data.id.toString())),
-                              DataCell(Text(data.name)),
-                              DataCell(Text(data.description)),
-                              DataCell(Text(data.name)),
-                              DataCell(Text(data.description)),
-                              DataCell(Text(data.name)),
-                              DataCell(Text(data.data)),
-                              DataCell(Row(
-                                children: [
-                                  IconButton(icon: Icon(Icons.edit,size: 20,color: Colors.green,), onPressed: () {setState(() {
+                      updatelist_?Investorupdate():Container()
 
-                                  });  },),
-                                  IconButton(icon: Icon(Icons.delete,size: 20,color: Colors.red,), onPressed: () { setState(() {
-
-                                  });},),
-                                ],
-                              )),
-                            ],
-                          );
-                        }).toList(),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.arrow_back),
-                            onPressed: _currentPage == 1
-                                ? null
-                                : () {
-                              setState(() {
-                                _currentPage--;
-                              });
-                            },
-                          ),
-                          Text('Page $_currentPage'),
-                          IconButton(
-                            icon: Icon(Icons.arrow_forward),
-                            onPressed: _currentPage == (_data.length / _rowsPerPage).ceil()
-                                ? null
-                                : () {
-                              setState(() {
-                                _currentPage++;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
                     ],
-                  ),
+                   ),
                 ),
-
-                updatelist_?Investorupdate():Container()
-
-              ],
-             ),
+              ),
+            ),
           ),
-        ),
+        ],
       ),
+      bottomNavigationBar: getBottomBar(),
     );
   }
 

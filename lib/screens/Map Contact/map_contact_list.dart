@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/appbar_bottombar.dart';
+import '../../widgets/get_drawer.dart';
 import '../../widgets/style/style.dart';
 
 class MapContactList extends StatefulWidget {
@@ -28,96 +30,106 @@ class _MapContactListState extends State<MapContactList> {
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: pageBackground,
-      child: Column(
+    return Scaffold(
+      appBar: getAppBar(),
+      body: Row(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 4.0,left: 4.0, top: 4.0),
+          getDrawer(context),
+          Expanded(
             child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height*0.08,
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding:  EdgeInsets.only(left: 8.0),
-                child: Text("Map Contact List", style: TextStyle(fontSize: 20,color: Colors.green),),
-              ),
-              color: Colors.white,
-            ),
-          ),
-
-
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-              color: Colors.white,
+              color: pageBackground,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                      columns: [
-                        DataColumn(label: Text('S.No.')),
-                        DataColumn(label: Text('Name')),
-                        DataColumn(label: Text('Phone No.')),
-                        DataColumn(label: Text('Email')),
-                        DataColumn(label: Text('State')),
-                        DataColumn(label: Text('City')),
-                        DataColumn(label: Text('Address')),
-                        DataColumn(label: Text('Action')),
-                      ],
-                      rows: _pagedData.map((data) {
-                        return DataRow(
-                          cells: [
-                            DataCell(Text(data.id.toString())),
-                            DataCell(Text(data.name)),
-                            DataCell(Text(data.description)),
-                            DataCell(Text(data.name)),
-                            DataCell(Text(data.data)),
-                            DataCell(Text(data.name)),
-                            DataCell(Text(data.description)),
-                            DataCell(Row(
-                              children: [
-                                IconButton(icon: Icon(Icons.edit,size: 20,color: Colors.green,), onPressed: () {setState(() {
-
-                                });  },),
-                                IconButton(icon: Icon(Icons.delete,size: 20,color: Colors.red,), onPressed: () { setState(() {
-
-                                });},),
-                              ],
-                            )),
-                          ],
-                        );
-                      }).toList(),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 4.0,left: 4.0, top: 4.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height*0.08,
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding:  EdgeInsets.only(left: 8.0),
+                        child: Text("Map Contact List", style: TextStyle(fontSize: 20,color: Colors.green),),
+                      ),
+                      color: Colors.white,
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.arrow_back),
-                        onPressed: _currentPage == 1
-                            ? null
-                            : () {
-                          setState(() {
-                            _currentPage--;
-                          });
-                        },
+
+
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Container(
+                      color: Colors.white,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: DataTable(
+                              columns: [
+                                DataColumn(label: Text('S.No.')),
+                                DataColumn(label: Text('Name')),
+                                DataColumn(label: Text('Phone No.')),
+                                DataColumn(label: Text('Email')),
+                                DataColumn(label: Text('State')),
+                                DataColumn(label: Text('City')),
+                                DataColumn(label: Text('Address')),
+                                DataColumn(label: Text('Action')),
+                              ],
+                              rows: _pagedData.map((data) {
+                                return DataRow(
+                                  cells: [
+                                    DataCell(Text(data.id.toString())),
+                                    DataCell(Text(data.name)),
+                                    DataCell(Text(data.description)),
+                                    DataCell(Text(data.name)),
+                                    DataCell(Text(data.data)),
+                                    DataCell(Text(data.name)),
+                                    DataCell(Text(data.description)),
+                                    DataCell(Row(
+                                      children: [
+                                        IconButton(icon: Icon(Icons.edit,size: 20,color: Colors.green,), onPressed: () {setState(() {
+
+                                        });  },),
+                                        IconButton(icon: Icon(Icons.delete,size: 20,color: Colors.red,), onPressed: () { setState(() {
+
+                                        });},),
+                                      ],
+                                    )),
+                                  ],
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.arrow_back),
+                                onPressed: _currentPage == 1
+                                    ? null
+                                    : () {
+                                  setState(() {
+                                    _currentPage--;
+                                  });
+                                },
+                              ),
+                              Text('Page $_currentPage'),
+                              IconButton(
+                                icon: Icon(Icons.arrow_forward),
+                                onPressed: _currentPage == (_data.length / _rowsPerPage).ceil()
+                                    ? null
+                                    : () {
+                                  setState(() {
+                                    _currentPage++;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      Text('Page $_currentPage'),
-                      IconButton(
-                        icon: Icon(Icons.arrow_forward),
-                        onPressed: _currentPage == (_data.length / _rowsPerPage).ceil()
-                            ? null
-                            : () {
-                          setState(() {
-                            _currentPage++;
-                          });
-                        },
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -125,6 +137,7 @@ class _MapContactListState extends State<MapContactList> {
           ),
         ],
       ),
+      bottomNavigationBar: getBottomBar(),
     );
   }
 }

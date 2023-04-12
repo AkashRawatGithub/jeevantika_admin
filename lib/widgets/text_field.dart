@@ -203,17 +203,16 @@ custom_textField_withlabel3(controller, hintText, labelText, errorMsg,
   return Container(
     width: width_h,
     margin:
-        EdgeInsets.symmetric(horizontal: SizeTamp.blockSizeHorizontal * 0),
-    padding: EdgeInsets.only(top: SizeTamp.blockSizeVertical * 1.5),
+    EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 10),
+    padding: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 1.5),
     child: TextFormField(
-      style: TextStyle(fontSize: SizeTamp.screenHeight*0.02),
       decoration: InputDecoration(
           isDense: true,
           contentPadding:
-              const EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+          const EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
           border: OutlineInputBorder(),
           hintText: hintText,
-          hintStyle: TextStyle(color: hintColor, fontSize: SizeTamp.screenHeight*0.01),
+          hintStyle: TextStyle(color: hintColor, fontSize: hintFontSize),
           labelText: labelText,
           labelStyle: TextStyle(color: dark)),
       controller: controller,
@@ -226,7 +225,6 @@ custom_textField_withlabel3(controller, hintText, labelText, errorMsg,
     ),
   );
 }
-
 custom_textField_withlabel4(
     controller, hintText, labelText, hintColor, hintFontSize, width_h) {
   return Container(

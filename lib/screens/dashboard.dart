@@ -1,7 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/responsive.dart';
+import '../widgets/appbar_bottombar.dart';
 import '../widgets/dashbord_widget.dart';
+import '../widgets/get_drawer.dart';
 import '../widgets/style/style.dart';
 
 class DashBoard extends StatefulWidget {
@@ -18,315 +21,55 @@ class _DashBoardState extends State<DashBoard> {
     {"value":"3","title":"Total Company","button":"Export"},
     {"value":"4","title":"Total Company","button":"Export"},
   ];
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: pageBackground,
-      child: ListView(scrollDirection:Axis.vertical,children: [Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: ResponsiveWidget.isLargeScreen(context)? Container(child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.2,
-                      height: 120,
-                      child:Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+    return Scaffold(
+      appBar: getAppBar(),
+      // drawer: getDrawer(context),
+      drawerEnableOpenDragGesture: false,
+      drawerScrimColor: Colors.transparent,
+      body: Row(
+        children: [
+          getDrawer(context),
+          Expanded(
+            child: Container(
+              color: pageBackground,
+              child: ListView(scrollDirection:Axis.vertical,children: [Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Container(
 
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0,top: 4),
-                            child: Container(child: Text("0",style: TextStyle(fontSize: 18),),),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 1.0,left: 1.0, top: 1.0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height*0.08,
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding:  EdgeInsets.only(left: 8.0),
+                              child: Text("Welcome to Jeevantika", style: TextStyle(fontSize: 20,color: Colors.green),),
+                            ),
+                            color: Colors.white,
                           ),
-                          SizedBox(height: 21,),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Container(child: Text("Total Registration",style: TextStyle(fontSize: 18),),),
-                          ),
-                          SizedBox(height: 25,),
-                          Container(height: 28,width: MediaQuery.of(context).size.width*0.2, color: EditBtn,child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text("Export",style: TextStyle(color: Colors.white, fontSize: 14, ),),
-                              Icon(Icons.arrow_circle_right_sharp,color: Colors.white,size: 18,)
-                            ],
-                          ),)
-                        ],
-                      ),
+                        ),
+
+                      ],
                     ),
                   ),
-                  SizedBox(width: 10,),
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.2,
-                      height: 120,
-                      child:Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0,top: 4),
-                            child: Container(child: Text("0",style: TextStyle(fontSize: 18),),),
-                          ),
-                          SizedBox(height: 21,),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Container(child: Text("Total Company",style: TextStyle(fontSize: 18),),),
-                          ),
-                          SizedBox(height: 25,),
-                          Container(height: 28,width: MediaQuery.of(context).size.width*0.2, color: Colors.lightBlueAccent,child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              // Text("Export",style: TextStyle(color: Colors.white, fontSize: 14, ),),
-                              // Icon(Icons.arrow_circle_right_sharp,color: Colors.white,size: 18,)
-                            ],
-                          ),)
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10,),
-                  dashbord(
-                    context,
-                    "","",""
-                  ),
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.2,
-                      height: 120,
-                      child:Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0,top: 4),
-                            child: Container(child: Text("0",style: TextStyle(fontSize: 18),),),
-                          ),
-                          SizedBox(height: 21,),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Container(child: Text("Total Market Value",style: TextStyle(fontSize: 18),),),
-                          ),
-                          SizedBox(height: 25,),
-                          Container(height: 28,width: MediaQuery.of(context).size.width*0.2, color: Colors.pink[400],child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              // Text("Export",style: TextStyle(color: Colors.white, fontSize: 14, ),),
-                              // Icon(Icons.arrow_circle_right_sharp,color: Colors.white,size: 18,)
-                            ],
-                          ),)
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10,),
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.2,
-                      height: 120,
-                      child:Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0,top: 4),
-                            child: Container(child: Text("0",style: TextStyle(fontSize: 18),),),
-                          ),
-                          SizedBox(height: 21,),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Container(child: Text("Total Update Investor",style: TextStyle(fontSize: 18),),),
-                          ),
-                          SizedBox(height: 25,),
-                          Container(height: 28,width: MediaQuery.of(context).size.width*0.2, color: Colors.purple,child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text("Export",style: TextStyle(color: Colors.white, fontSize: 14, ),),
-                              Icon(Icons.arrow_circle_right_sharp,color: Colors.white,size: 18,)
-                            ],
-                          ),)
-                        ],
-                      ),
-                    ),
-                  ),
-
-                ],
-              ),
-              // Row(
-              //   children: [
-              //     Card(
-              //       child: SizedBox(
-              //         width: MediaQuery.of(context).size.width*0.15,
-              //         height: 110,
-              //         child:Text('Total Registration'),
-              //       ),
-              //     ),
-              //     Card(
-              //       child: SizedBox(
-              //         width: MediaQuery.of(context).size.width*0.15,
-              //         height: 110,
-              //         child:Text('Total Registration'),
-              //       ),
-              //     ),
-              //     Card(
-              //       child: SizedBox(
-              //         width: MediaQuery.of(context).size.width*0.15,
-              //         height: 110,
-              //         child:Text('Total Registration'),
-              //       ),
-              //     ),
-              //     Card(
-              //       child: SizedBox(
-              //         width: MediaQuery.of(context).size.width*0.15,
-              //         height: 110,
-              //         child:Text('Total Registration'),
-              //       ),
-              //     ),
-              //     Card(
-              //       child: SizedBox(
-              //         width: MediaQuery.of(context).size.width*0.15,
-              //         height: 110,
-              //         child:Text('Total Registration'),
-              //       ),
-              //     ),
-              //
-              //   ],
-              // ),
-            ],
+                ),
+              )]),
+            ),
           ),
-          ): ResponsiveWidget.isMediumScreen(context)?Container(child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.3,
-                      height: 110,
-                      child:Text('Total Registration'),
-                    ),
-                  ),
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.3,
-                      height: 110,
-                      child:Text('Total Registration'),
-                    ),
-                  ),
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.3,
-                      height: 110,
-                      child:Text('Total Registration'),
-                    ),
-                  ),
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.3,
-                      height: 110,
-                      child:Text('Total Registration'),
-                    ),
-                  ),
-                ],
-              ),
-
-              Row(
-                children: [
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.3,
-                      height: 110,
-                      child:Text('Total Registration'),
-                    ),
-                  ),
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.3,
-                      height: 110,
-                      child:Text('Total Registration'),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          ): ResponsiveWidget.isSmallScreen(context)?Container(child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.45,
-                      height: 110,
-                      child:Text('Total Registration'),
-                    ),
-                  ),
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.45,
-                      height: 110,
-                      child:Text('Total Registration'),
-                    ),
-                  ),
-
-                ],
-              ),
-
-              Row(
-                children: [
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.45,
-                      height: 110,
-                      child:Text('Total Registration'),
-                    ),
-                  ),
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.45,
-                      height: 110,
-                      child:Text('Total Registration'),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Card(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width*0.45,
-                      height: 110,
-                      child:Text('Total Registration'),
-                    ),
-                  ),
-
-                ],
-              ),
-            ],
-          ),
-          ):Container(),
-        ),
-      )]),
+        ],
+      ),
+      bottomNavigationBar:getBottomBar(),
     );
   }
 }

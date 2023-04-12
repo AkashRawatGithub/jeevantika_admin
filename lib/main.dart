@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jeevantika_Web/page_layout.dart';
+import 'package:jeevantika_Web/utils/urlRoute.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,14 +14,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Jeevantika crm',
+      title: 'Jeevantika Clone',
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      initialRoute: '/home',
-      routes: {
-        '/home': (context) => const HomePage(),
-      },
+      onGenerateRoute: RouteGenerator.generateRoute,
+      initialRoute: RoutesName.FIRST_PAGE,
       // home: HomePage(),
 
     );

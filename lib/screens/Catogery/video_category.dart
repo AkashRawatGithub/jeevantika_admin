@@ -2,7 +2,9 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../utils/screen_size.dart';
+import '../../widgets/appbar_bottombar.dart';
 import '../../widgets/button.dart';
+import '../../widgets/get_drawer.dart';
 import '../../widgets/style/style.dart';
 import '../../widgets/text_field.dart';
 
@@ -38,136 +40,150 @@ class _VideoCategoryState extends State<VideoCategory> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Container(
-          color: pageBackground,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 4.0,left: 4.0, top: 8.0),
+    return Scaffold(
+      appBar: getAppBar(),
+      // drawer: getDrawer(context),
+      drawerEnableOpenDragGesture: false,
+      drawerScrimColor: Colors.transparent,
+      body: Row(
+        children: [
+          getDrawer(context),
+          Expanded(
+            child: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
                 child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height*0.08,
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding:  EdgeInsets.only(left: 8.0),
-                    child: Text("Videos Categories", style: TextStyle(fontSize: 22,color: Colors.green),),
-                  ),
-                  color: Colors.white,
-                ),
-              ),
-
-              Padding(
-                padding: EdgeInsets.only(left: 4.0, top: 4.0,right: 4.0),
-                child: Container(
-                  color: Colors.white,
-                  width: MediaQuery.of(context).size.width,
+                  color: pageBackground,
                   child: Column(
-                      children:[
-                        SizedBox(height: 14,),
-                        Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 4.0,left: 4.0, top: 8.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height*0.08,
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding:  EdgeInsets.only(left: 8.0),
+                            child: Text("Videos Categories", style: TextStyle(fontSize: 22,color: Colors.green),),
+                          ),
+                          color: Colors.white,
+                        ),
+                      ),
+
+                      Padding(
+                        padding: EdgeInsets.only(left: 4.0, top: 4.0,right: 4.0),
+                        child: Container(
+                          color: Colors.white,
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                              children:[
+                                SizedBox(height: 14,),
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 8.0),
+                                      child: Container(alignment: Alignment.centerLeft,child: Text("Category Name *",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: dark))),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 4,),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: custom_textField_withoutlabel(
+                                          message_title_controller,
+                                          "Enter Category",
+                                          "Please Enter Category Name",
+                                          Colors.black54,
+                                          SizeConfig.blockSizeVertical*1.5,
+                                          MediaQuery.of(context).size.width/2
+                                      ), ),
+                                    ),
+                                    custom_button(Save,"Add Categories"),
+                                    Expanded(flex:2,child: Container())
+                                  ],
+                                ),
+
+
+                              ]
+                          ),
+                        ),
+                      ),
+                      Container(
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Container(alignment: Alignment.centerLeft,child: Text("Category Name *",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: dark))),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: DataTable(
+                                columns: [
+                                  DataColumn(label: Text('S.No.')),
+                                  DataColumn(label: Text('Categories Name')),
+                                  DataColumn(label: Text('Action')),
+                                ],
+                                rows: _pagedData.map((data) {
+                                  return DataRow(
+                                    cells: [
+                                      DataCell(Text(data.id.toString())),
+                                      DataCell(Text(data.data)),
+                                      DataCell(Row(
+                                        children: [
+                                          IconButton(icon: Icon(Icons.edit,size: 20,color: Colors.green,), onPressed: () {setState(() {
+
+                                          });  },),
+                                          IconButton(icon: Icon(Icons.delete,size: 20,color: Colors.red,), onPressed: () { setState(() {
+
+                                          });},),
+                                        ],
+                                      )),
+                                    ],
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.arrow_back),
+                                  onPressed: _currentPage == 1
+                                      ? null
+                                      : () {
+                                    setState(() {
+                                      _currentPage--;
+                                    });
+                                  },
+                                ),
+                                Text('Page $_currentPage'),
+                                IconButton(
+                                  icon: Icon(Icons.arrow_forward),
+                                  onPressed: _currentPage == (_data.length / _rowsPerPage).ceil()
+                                      ? null
+                                      : () {
+                                    setState(() {
+                                      _currentPage++;
+                                    });
+                                  },
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        SizedBox(height: 4,),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0,bottom: 10),
-                              child: Container(
-                                alignment: Alignment.centerLeft,
-                                child: custom_textField_withoutlabel(
-                                  message_title_controller,
-                                  "Enter Category",
-                                  "Please Enter Category Name",
-                                  Colors.black54,
-                                  SizeConfig.blockSizeVertical*1.5,
-                                  MediaQuery.of(context).size.width/2
-                              ), ),
-                            ),
-                            Container(width:MediaQuery.of(context).size.width/3,alignment: Alignment.centerRight,child: custom_button(Save,"Add Categories"),)
-                          ],
-                        ),
-
-
-                      ]
+                      ),
+                    ],
                   ),
                 ),
               ),
-              Container(
-                color: Colors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: DataTable(
-                        columns: [
-                          DataColumn(label: Text('S.No.')),
-                          DataColumn(label: Text('Categories Name')),
-                          DataColumn(label: Text('Action')),
-                        ],
-                        rows: _pagedData.map((data) {
-                          return DataRow(
-                            cells: [
-                              DataCell(Text(data.id.toString())),
-                              DataCell(Text(data.data)),
-                              DataCell(Row(
-                                children: [
-                                  IconButton(icon: Icon(Icons.edit,size: 20,color: Colors.green,), onPressed: () {setState(() {
-
-                                  });  },),
-                                  IconButton(icon: Icon(Icons.delete,size: 20,color: Colors.red,), onPressed: () { setState(() {
-
-                                  });},),
-                                ],
-                              )),
-                            ],
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.arrow_back),
-                          onPressed: _currentPage == 1
-                              ? null
-                              : () {
-                            setState(() {
-                              _currentPage--;
-                            });
-                          },
-                        ),
-                        Text('Page $_currentPage'),
-                        IconButton(
-                          icon: Icon(Icons.arrow_forward),
-                          onPressed: _currentPage == (_data.length / _rowsPerPage).ceil()
-                              ? null
-                              : () {
-                            setState(() {
-                              _currentPage++;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
+      bottomNavigationBar: getBottomBar(),
     );
   }
 

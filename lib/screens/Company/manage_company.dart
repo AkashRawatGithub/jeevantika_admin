@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jeevantika_Web/widgets/button.dart';
 import 'package:jeevantika_Web/widgets/style/style.dart';
+import '../../widgets/appbar_bottombar.dart';
+import '../../widgets/get_drawer.dart';
 import '../../widgets/text_field.dart';
 
 
@@ -35,156 +37,165 @@ class _ManageCompanyState extends State<ManageCompany> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Container(
-          color: pageBackground,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Column(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height*0.08,
-                  width: MediaQuery.of(context).size.width,
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding:  EdgeInsets.only(left: 8.0),
-                    child: Text("Company Table", style: TextStyle(fontSize: 20,color: Colors.green),),
-                  ),
-                  color: Colors.white,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 4.0,),
-                  child: Form(
-                    child: Container(
+      drawerScrimColor: Colors.transparent,
+      appBar: getAppBar(),
+      // drawer: getDrawer(context),
+      drawerEnableOpenDragGesture: false,
+      body: Row(
+        children: [
+          getDrawer(context),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Container(
+                color: pageBackground,
+                child: Column(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height*0.08,
+                      width: MediaQuery.of(context).size.width,
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding:  EdgeInsets.only(left: 8.0),
+                        child: Text("Company Table", style: TextStyle(fontSize: 20,color: Colors.green),),
+                      ),
                       color: Colors.white,
-                      child: Row(
-                        children: [
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0,),
+                      child: Form(
+                        child: Container(
+                          color: Colors.white,
+                          child: Row(
+                            children: [
 
-                          SizedBox(height: 10,width: 10 ),
-                          custom_textField_withlabel2(
-                              company_name_controller,
-                              "Enter Company",
-                              Colors.green,
-                              15,
-                              "Please Enter Company",
-                              "Select Company*",
-                              true
+                              SizedBox(height: 10,width: 10 ),
+                              custom_textField_withlabel2(
+                                  company_name_controller,
+                                  "Enter Company",
+                                  Colors.green,
+                                  15,
+                                  "Please Enter Company",
+                                  "Select Company*",
+                                  true
+                              ),
+                              SizedBox(height: 10,width: 10),
+                              custom_textField_withlabel2(
+                                  company_name_controller,
+                                  "Enter Registrar",
+                                  Colors.green,
+                                  15,
+                                  "Please Enter Registrar",
+                                  "Select Registrar *",
+                                  true
+                              ),SizedBox(height: 10,width: 10),
+                              custom_textField_withlabel2(
+                                  company_name_controller,
+                                  "Enter Email",
+                                  Colors.green,
+                                  15,
+                                  "Please Enter Email",
+                                  "Email*",
+                                  true
+                              ),
+                              SizedBox(height: 10,width: 10,),
+                              custom_textField_withlabel2(
+                                  company_name_controller,
+                                  "Enter Phone No.",
+                                  Colors.green,
+                                  15,
+                                  "Please Enter Phone No.",
+                                  "Phone No.*",
+                                  true
+                              ),
+                              Padding(
+                                padding:  EdgeInsets.only(left: 8.0),
+                                child:custom_button(Save,"Search"),
+                              ),
+                              custom_Searchbutton(Save,"Export"),
+                            ],
                           ),
-                          SizedBox(height: 10,width: 10),
-                          custom_textField_withlabel2(
-                              company_name_controller,
-                              "Enter Registrar",
-                              Colors.green,
-                              15,
-                              "Please Enter Registrar",
-                              "Select Registrar *",
-                              true
-                          ),SizedBox(height: 10,width: 10),
-                          custom_textField_withlabel2(
-                              company_name_controller,
-                              "Enter Email",
-                              Colors.green,
-                              15,
-                              "Please Enter Email",
-                              "Email*",
-                              true
+                        ),
+                      ),
+                    ),
+
+                    Container(
+                      color: Colors.white,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: DataTable(
+                              columns: [
+                                DataColumn(label: Text('S.No.')),
+                                DataColumn(label: Text('Company Name')),
+                                DataColumn(label: Text('Registrar Name')),
+                                DataColumn(label: Text('Email')),
+                                DataColumn(label: Text('Phone No.')),
+                                DataColumn(label: Text('Action')),
+                              ],
+                              rows: _pagedData.map((data) {
+                                return DataRow(
+                                  cells: [
+                                    DataCell(Text(data.id.toString())),
+                                    DataCell(Text(data.name)),
+                                    DataCell(Text(data.description)),
+                                    DataCell(Text(data.name)),
+                                    DataCell(Text(data.data)),
+                                    DataCell(Row(
+                                      children: [
+                                        IconButton(icon: Icon(Icons.edit,size: 20,color: Colors.green,), onPressed: () {setState(() {
+
+                                        });  },),
+                                        IconButton(icon: Icon(Icons.delete,size: 20,color: Colors.red,), onPressed: () { setState(() {
+
+                                        });},),
+                                      ],
+                                    )),
+                                  ],
+                                );
+                              }).toList(),
+                            ),
                           ),
-                          SizedBox(height: 10,width: 10,),
-                          custom_textField_withlabel2(
-                              company_name_controller,
-                              "Enter Phone No.",
-                              Colors.green,
-                              15,
-                              "Please Enter Phone No.",
-                              "Phone No.*",
-                              true
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.arrow_back),
+                                onPressed: _currentPage == 1
+                                    ? null
+                                    : () {
+                                  setState(() {
+                                    _currentPage--;
+                                  });
+                                },
+                              ),
+                              Text('Page $_currentPage'),
+                              IconButton(
+                                icon: Icon(Icons.arrow_forward),
+                                onPressed: _currentPage == (_data.length / _rowsPerPage).ceil()
+                                    ? null
+                                    : () {
+                                  setState(() {
+                                    _currentPage++;
+                                  });
+                                },
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding:  EdgeInsets.only(left: 8.0),
-                            child:custom_button(Save,"Search"),
-                          ),
-                          custom_Searchbutton(Save,"Export"),
                         ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
-
-                Container(
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: DataTable(
-                          columns: [
-                            DataColumn(label: Text('S.No.')),
-                            DataColumn(label: Text('Company Name')),
-                            DataColumn(label: Text('Registrar Name')),
-                            DataColumn(label: Text('Email')),
-                            DataColumn(label: Text('Phone No.')),
-                            DataColumn(label: Text('Action')),
-                          ],
-                          rows: _pagedData.map((data) {
-                            return DataRow(
-                              cells: [
-                                DataCell(Text(data.id.toString())),
-                                DataCell(Text(data.name)),
-                                DataCell(Text(data.description)),
-                                DataCell(Text(data.name)),
-                                DataCell(Text(data.data)),
-                                DataCell(Row(
-                                  children: [
-                                    IconButton(icon: Icon(Icons.edit,size: 20,color: Colors.green,), onPressed: () {setState(() {
-
-                                    });  },),
-                                    IconButton(icon: Icon(Icons.delete,size: 20,color: Colors.red,), onPressed: () { setState(() {
-
-                                    });},),
-                                  ],
-                                )),
-                              ],
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.arrow_back),
-                            onPressed: _currentPage == 1
-                                ? null
-                                : () {
-                              setState(() {
-                                _currentPage--;
-                              });
-                            },
-                          ),
-                          Text('Page $_currentPage'),
-                          IconButton(
-                            icon: Icon(Icons.arrow_forward),
-                            onPressed: _currentPage == (_data.length / _rowsPerPage).ceil()
-                                ? null
-                                : () {
-                              setState(() {
-                                _currentPage++;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
+      bottomNavigationBar: getBottomBar(),
     );
   }
   Save(){

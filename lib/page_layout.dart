@@ -42,8 +42,6 @@ import 'package:jeevantika_Web/screens/Notification/add_notification_group.dart'
 import 'package:jeevantika_Web/screens/Notification/add_notification_indivisual.dart';
 import 'package:jeevantika_Web/screens/Notification/customer_groups.dart';
 import 'package:jeevantika_Web/screens/Notification/message_event_template.dart';
-import 'package:jeevantika_Web/screens/Registrar/add_registrar.dart';
-import 'package:jeevantika_Web/screens/Registrar/manage_registrar.dart';
 import 'package:jeevantika_Web/screens/backoffice/change_password.dart';
 import 'package:jeevantika_Web/screens/dashboard.dart';
 import 'package:jeevantika_Web/screens/statistics.dart';
@@ -51,6 +49,7 @@ import 'package:jeevantika_Web/utils/constants.dart';
 import 'package:jeevantika_Web/utils/responsive.dart';
 import 'package:jeevantika_Web/utils/screen_size.dart';
 import 'package:jeevantika_Web/widgets/dashbord_widget.dart';
+import 'package:jeevantika_Web/widgets/get_drawer.dart';
 import 'package:jeevantika_Web/widgets/style/style.dart';
 
 import 'main.dart';
@@ -81,7 +80,7 @@ class _HomePageState extends State<HomePage> {
     HomeDataVideos(),    HomeDataTestimonial(),    HomedataArticle(),    HomeDataInformation(),    HomeDataWeblink(),
     HomeDataSlider(),    ImportData(),    InvestorList(),    BackofficeList(),    LiasoningList(),    BusinessPartnerList(),
     AddMapContact(),    MapContactList(),    AddCouponCode(),    ManageCouponCode(),    ChangePassword() ,
-    Add_Registrar(),Manage_Registrar(),Add_Manager(),Manage_Manager(),Add_API_Patner(),Manage_Business_patner(),
+    Add_Manager(),Manage_Manager(),Add_API_Patner(),Manage_Business_patner(),
     Add_Associate(),Manage_Associate(),Export_Investor(),Export_search_list(), Request_Business(),Export_Notificationdata(),
     AnalyticInvestorList(),ConsolidtedInvestorList(),AnalyticCustomerContact(),AnalyticUserHistory(),PerUserAnalytic(),
     Statistics()
@@ -91,47 +90,48 @@ class _HomePageState extends State<HomePage> {
     SizeTamp().init(context);
     return Scaffold(
       key: scaffoldKey,
-      drawer: Drawer(
-        backgroundColor: sidenav,
-        child: SafeArea(
-          child:Column(
-            children: [
-              ListTile(
-                dense: true,
-                title: Text("Home Page",style: TextStyle(color: righticons),),
-                leading: Icon(Icons.home),
-                onTap: (){
-                  //action when this menu is pressed
-                },
-              ),
-
-              ListTile(
-                dense: true,
-                title: Text("My Profile",style: TextStyle(color: righticons),),
-                leading: Icon(Icons.person),
-                onTap: (){
-                  //action when this menu is pressed
-                },
-              ),
-              ListTile(
-                dense: true,
-                title: Text("My Orders",style: TextStyle(color: righticons),),
-                leading: Icon(Icons.add_box),
-                onTap: (){
-                  //action when this menu is pressed
-                },
-              ),
-              ListTile(
-                dense: true,
-                title: Text("My Favourites",style: TextStyle(color: righticons),),
-                leading: Icon(Icons.monitor_heart),
-                onTap: (){
-                  //action when this menu is pressed
-                },
-              )
-            ],
-          )
-      ),),
+      // drawer: getDrawer(),
+      // drawer: Drawer(
+      //   backgroundColor: sidenav,
+      //   child: SafeArea(
+      //     child:Column(
+      //       children: [
+      //         ListTile(
+      //           dense: true,
+      //           title: Text("Home Page",style: TextStyle(color: righticons),),
+      //           leading: Icon(Icons.home),
+      //           onTap: (){
+      //             //action when this menu is pressed
+      //           },
+      //         ),
+      //
+      //         ListTile(
+      //           dense: true,
+      //           title: Text("My Profile",style: TextStyle(color: righticons),),
+      //           leading: Icon(Icons.person),
+      //           onTap: (){
+      //             //action when this menu is pressed
+      //           },
+      //         ),
+      //         ListTile(
+      //           dense: true,
+      //           title: Text("My Orders",style: TextStyle(color: righticons),),
+      //           leading: Icon(Icons.add_box),
+      //           onTap: (){
+      //             //action when this menu is pressed
+      //           },
+      //         ),
+      //         ListTile(
+      //           dense: true,
+      //           title: Text("My Favourites",style: TextStyle(color: righticons),),
+      //           leading: Icon(Icons.monitor_heart),
+      //           onTap: (){
+      //             //action when this menu is pressed
+      //           },
+      //         )
+      //       ],
+      //     )
+      // ),),
       appBar: AppBar(backgroundColor: topnav,leading: !ResponsiveWidget.isSmallScreen(context)? Container(
         child: Image.asset("assets/images/1.png",),
       ):IconButton(icon: Icon(Icons.menu,color: Colors.white,),

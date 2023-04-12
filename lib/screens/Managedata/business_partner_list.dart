@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../utils/screen_size.dart';
+import '../../widgets/appbar_bottombar.dart';
 import '../../widgets/button.dart';
+import '../../widgets/get_drawer.dart';
 import '../../widgets/style/style.dart';
 import '../../widgets/text_field.dart';
 
@@ -26,251 +28,263 @@ var invisibleTable_= false;
 class _BusinessPartnerListState extends State<BusinessPartnerList> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Container(
-        color: pageBackground,
-        child: sendCompany_==true?SendCompany():receiveCompany_==true?ReceiveCompany():Column(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.08,
-              width: MediaQuery.of(context).size.width,
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 8.0),
-                child: Text(
-                  "Business Partner List",
-                  style: TextStyle(fontSize: 20, color: Colors.green),
-                ),
-              ),
-              color: Colors.white,
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 4.0),
+    return Scaffold(
+      appBar: getAppBar(),
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          getDrawer(context),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
               child: Container(
-                color: Colors.white,
-                padding: EdgeInsets.all(20.0),
-                child: Column(
+                color: pageBackground,
+                child: sendCompany_==true?SendCompany():receiveCompany_==true?ReceiveCompany():Column(
                   children: [
-                    Table(
-                      columnWidths: {
-                        2: FlexColumnWidth(4),
-                        3: FlexColumnWidth(4),
-                        11:FlexColumnWidth(3)
-                      },
-                      border: TableBorder.all(color: Colors.black),
-                      children: [
-                        TableRow(children: [
-                          Container(child: Text('#', style: TextStyle(fontWeight: FontWeight.bold)) ,alignment: Alignment.center,height: 50,),
-                          Container(child: Text('S.No.', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                          Container(child: Text('Partner Name', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                          Container(child: Text('Partner Address', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                          Container(child: Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                          Container(child: Text('Phone Number', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                          Container(child: Text('Total Company', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                          Container(child: Text('Total Investor', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                          Container(child: Text('Total State', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                          Container(child: Text('Total City', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                          Container(child: Text('Total Market Value', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                          Container(child: Text('Action', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                        ]),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      width: MediaQuery.of(context).size.width,
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          "Business Partner List",
+                          style: TextStyle(fontSize: 20, color: Colors.green),
+                        ),
+                      ),
+                      color: Colors.white,
+                    ),
 
-                        TableRow(children: [
-                          Container(alignment: Alignment.center, child:
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12.0),
-                            child: Column(
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: Container(
+                        color: Colors.white,
+                        padding: EdgeInsets.all(20.0),
+                        child: Column(
+                          children: [
+                            Table(
+                              columnWidths: {
+                                2: FlexColumnWidth(4),
+                                3: FlexColumnWidth(4),
+                                11:FlexColumnWidth(3)
+                              },
+                              border: TableBorder.all(color: Colors.black),
                               children: [
+                                TableRow(children: [
+                                  Container(child: Text('#', style: TextStyle(fontWeight: FontWeight.bold)) ,alignment: Alignment.center,height: 50,),
+                                  Container(child: Text('S.No.', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                  Container(child: Text('Partner Name', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                  Container(child: Text('Partner Address', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                  Container(child: Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                  Container(child: Text('Phone Number', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                  Container(child: Text('Total Company', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                  Container(child: Text('Total Investor', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                  Container(child: Text('Total State', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                  Container(child: Text('Total City', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                  Container(child: Text('Total Market Value', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                  Container(child: Text('Action', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                ]),
 
-                                Container(
-                                  width: 30,
-                                  height: 30,
-                                  child: FloatingActionButton(
-                                    shape: const BeveledRectangleBorder( borderRadius: BorderRadius.zero ),
-                                    backgroundColor: EditBtn,
-                                    child:  Icon(visibleTable_==true?Icons.remove:Icons.add,size: 15,color: Colors.white,),
-                                    onPressed: () { setState(() {
-                                      visibleTable_ =! visibleTable_;
-                                    }); },
+                                TableRow(children: [
+                                  Container(alignment: Alignment.center, child:
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 12.0),
+                                    child: Column(
+                                      children: [
+
+                                        Container(
+                                          width: 30,
+                                          height: 30,
+                                          child: FloatingActionButton(
+                                            shape: const BeveledRectangleBorder( borderRadius: BorderRadius.zero ),
+                                            backgroundColor: EditBtn,
+                                            child:  Icon(visibleTable_==true?Icons.remove:Icons.add,size: 15,color: Colors.white,),
+                                            onPressed: () { setState(() {
+                                              visibleTable_ =! visibleTable_;
+                                            }); },
+                                          ),
+                                        )
+
+                                      ],
+                                    ),
+                                  )),
+                                  Container(alignment: Alignment.center, child: const Padding(
+                                    padding: EdgeInsets.only(top: 20.0),
+                                    child: Text('1', style: TextStyle(fontWeight: FontWeight.bold)),
+                                  )),
+                                  Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
+                                  Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
+                                  Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
+                                  Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
+                                  Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
+                                  Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
+                                  Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
+                                  Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
+                                  Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 4.0, top: 3),
+                                              child: Container(
+                                                decoration: BoxDecoration(color: EditBtn,
+                                                  borderRadius: BorderRadius.circular(4.0),
+                                                ),
+                                                child: GestureDetector(child: TextButton(onPressed: () { setState(() {
+                                                  sendCompany_=!sendCompany_;
+                                                }); },
+                                                    child: const Text("Send Company",style: TextStyle(color: Colors.white),))),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 4.0,top: 4, bottom: 3),
+                                              child: Container(
+                                                width: 145,
+                                                decoration: BoxDecoration(color: SubmitGreen,
+                                                  borderRadius: BorderRadius.circular(4.0),
+                                                ),
+                                                child: GestureDetector(child: TextButton(onPressed: () { setState(() {
+                                                  receiveCompany_=!receiveCompany_;
+                                                }); },
+                                                    child: const Text("Receive Company",style: TextStyle(color: Colors.white),))),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ]),
+
+                                TableRow(children: [
+                                  Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                  Container(width:200,alignment: Alignment.center, child: const Text('1', style: TextStyle(fontWeight: FontWeight.bold))),
+                                  Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
+                                  Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                  Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                  Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                  Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                  Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                  Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                  Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                  Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                  Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                ])
+
+                              ],
+                            ),
+                            Visibility(
+                              visible: visibleTable_,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black,
+                                    width: 1
+                                  )
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Table(
+                                    columnWidths: {
+
+                                      1: FlexColumnWidth(4),
+                                      2: FlexColumnWidth(4),
+                                      10:FlexColumnWidth(3)
+                                    },
+                                    border: TableBorder.all(color: Colors.black),
+                                    children: [
+                                      TableRow(children: [
+                                        Container(child: Text('S.No.', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                        Container(child: Text('Partner Name', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                        Container(child: Text('Partner Address', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                        Container(child: Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                        Container(child: Text('Phone Number', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                        Container(child: Text('Total Company', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                        Container(child: Text('Total Investor', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                        Container(child: Text('Total State', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                        Container(child: Text('Total City', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                        Container(child: Text('Total Market Value', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                        Container(child: Text('Action', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
+                                      ]),
+
+                                      TableRow(children: [
+                                        Container(child: Text('1', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                        Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                        Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                        Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                        Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                        Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                        Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                        Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                        Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                        Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
+                                        Container(
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(left: 4.0, top: 3),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(color: EditBtn,
+                                                        borderRadius: BorderRadius.circular(4.0),
+                                                      ),
+                                                      child: GestureDetector(child: TextButton(onPressed: () { setState(() {
+                                                        sendCompany_=!sendCompany_;
+                                                      }); },
+                                                          child: Text("Send Company",style: TextStyle(color: Colors.white),))),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+
+                                              Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(left: 4.0,top: 4, bottom: 3),
+                                                    child: Container(
+                                                      width: 145,
+                                                      decoration: BoxDecoration(color: SubmitGreen,
+                                                        borderRadius: BorderRadius.circular(4.0),
+                                                      ),
+                                                      child: GestureDetector(child: TextButton(onPressed: () { setState(() {
+                                                        receiveCompany_=!receiveCompany_;
+                                                      }); },
+                                                          child: Text("Receive Company",style: TextStyle(color: Colors.white),))),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),alignment: Alignment.center,
+                                        ),
+                                      ]),
+                                    ],
                                   ),
                                 )
-
-                              ],
+                              ),
                             ),
-                          )),
-                          Container(alignment: Alignment.center, child: const Padding(
-                            padding: EdgeInsets.only(top: 20.0),
-                            child: Text('1', style: TextStyle(fontWeight: FontWeight.bold)),
-                          )),
-                          Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
-                          Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
-                          Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
-                          Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
-                          Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
-                          Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
-                          Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
-                          Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
-                          Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 4.0, top: 3),
-                                      child: Container(
-                                        decoration: BoxDecoration(color: EditBtn,
-                                          borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                        child: GestureDetector(child: TextButton(onPressed: () { setState(() {
-                                          sendCompany_=!sendCompany_;
-                                        }); },
-                                            child: const Text("Send Company",style: TextStyle(color: Colors.white),))),
-                                      ),
-                                    ),
-                                  ],
-                                ),
 
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 4.0,top: 4, bottom: 3),
-                                      child: Container(
-                                        width: 145,
-                                        decoration: BoxDecoration(color: SubmitGreen,
-                                          borderRadius: BorderRadius.circular(4.0),
-                                        ),
-                                        child: GestureDetector(child: TextButton(onPressed: () { setState(() {
-                                          receiveCompany_=!receiveCompany_;
-                                        }); },
-                                            child: const Text("Receive Company",style: TextStyle(color: Colors.white),))),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ]),
-
-                        TableRow(children: [
-                          Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                          Container(width:200,alignment: Alignment.center, child: const Text('1', style: TextStyle(fontWeight: FontWeight.bold))),
-                          Container(alignment: Alignment.center, child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold))),
-                          Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                          Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                          Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                          Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                          Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                          Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                          Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                          Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                          Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                        ])
-
-                      ],
-                    ),
-                    Visibility(
-                      visible: visibleTable_,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black,
-                            width: 1
-                          )
+                          ],
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Table(
-                            columnWidths: {
-
-                              1: FlexColumnWidth(4),
-                              2: FlexColumnWidth(4),
-                              10:FlexColumnWidth(3)
-                            },
-                            border: TableBorder.all(color: Colors.black),
-                            children: [
-                              TableRow(children: [
-                                Container(child: Text('S.No.', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                                Container(child: Text('Partner Name', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                                Container(child: Text('Partner Address', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                                Container(child: Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                                Container(child: Text('Phone Number', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                                Container(child: Text('Total Company', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                                Container(child: Text('Total Investor', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                                Container(child: Text('Total State', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                                Container(child: Text('Total City', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                                Container(child: Text('Total Market Value', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                                Container(child: Text('Action', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center,height: 50,),
-                              ]),
-
-                              TableRow(children: [
-                                Container(child: Text('1', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                                Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                                Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                                Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                                Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                                Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                                Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                                Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                                Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                                Container(child: Text(' ', style: TextStyle(fontWeight: FontWeight.bold)),alignment: Alignment.center),
-                                Container(
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 4.0, top: 3),
-                                            child: Container(
-                                              decoration: BoxDecoration(color: EditBtn,
-                                                borderRadius: BorderRadius.circular(4.0),
-                                              ),
-                                              child: GestureDetector(child: TextButton(onPressed: () { setState(() {
-                                                sendCompany_=!sendCompany_;
-                                              }); },
-                                                  child: Text("Send Company",style: TextStyle(color: Colors.white),))),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 4.0,top: 4, bottom: 3),
-                                            child: Container(
-                                              width: 145,
-                                              decoration: BoxDecoration(color: SubmitGreen,
-                                                borderRadius: BorderRadius.circular(4.0),
-                                              ),
-                                              child: GestureDetector(child: TextButton(onPressed: () { setState(() {
-                                                receiveCompany_=!receiveCompany_;
-                                              }); },
-                                                  child: Text("Receive Company",style: TextStyle(color: Colors.white),))),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),alignment: Alignment.center,
-                                ),
-                              ]),
-                            ],
-                          ),
-                        )
                       ),
                     ),
-
                   ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
+      bottomNavigationBar: getBottomBar(),
     );
   }
 }
